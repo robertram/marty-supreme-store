@@ -1,12 +1,30 @@
-<div class="">
-  <img src="{{section.settings.banner_image}}" class="w-full ">
+<div class="relative">
 
-  <h1>{{ section.settings.title }}</h1>
+  <!-- Bottom gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10"></div>
 
-  <a class="w-full max-w-[300px] bg-primary" href="{{ section.settings.primary_cta_link }}">
-    {{- section.settings.primary_cta_text -}}
-  </a>
+  <!-- Text + button -->
+  <div class="absolute bottom-0 left-0 z-20 p-6">
+    <h1 class="text-white text-4xl font-bold mb-4">
+      {{ section.settings.title }}
+    </h1>
+
+    <a
+      class="inline-block w-full max-w-[300px] bg-primary text-white px-6 py-3 rounded-md font-medium"
+      href="{{ section.settings.primary_cta_link }}"
+    >
+      {{ section.settings.primary_cta_text }}
+    </a>
+  </div>
+
+  <!-- Image -->
+  <img
+    src="{{ section.settings.banner_image | image_url }}"
+    alt="{{ section.settings.banner_image.alt | default: section.settings.title }}"
+    class="w-full h-[80vh] object-cover"
+  >
 </div>
+
 
 {% schema %}
 {
