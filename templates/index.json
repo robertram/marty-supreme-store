@@ -13,10 +13,10 @@
       "type": "template-main-hero",
       "name": "Main Hero",
       "settings": {
-        "title": "La mejor tienda online",
+        "title": "Wear the Story",
         "banner_image": "shopify://shop_images/Hero_image.webp",
-        "primary_cta_text": "Go to Google",
-        "primary_cta_link": "https://google.com"
+        "primary_cta_text": "Shop the Collection",
+        "primary_cta_link": "/collections/all"
       }
     },
     "template_hero": {
