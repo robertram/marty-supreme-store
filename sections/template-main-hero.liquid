@@ -1,0 +1,38 @@
+<div class="">
+  <img src="{{section.settings.banner_image}}" class="w-full ">
+
+  <h1>{{ section.settings.title }}</h1>
+
+  <a class="w-full max-w-[300px] bg-primary" href="{{ section.settings.primary_cta_link }}">
+    {{- section.settings.primary_cta_text -}}
+  </a>
+</div>
+
+{% schema %}
+{
+  "name": "Template Main Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Marty Supreme"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Text"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_link",
+      "label": "Primary CTA Link"
+    }
+  ]
+}
+{% endschema %}

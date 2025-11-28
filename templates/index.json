@@ -9,6 +9,17 @@
  */
 {
   "sections": {
+    "template_main_hero": {
+      "type": "template-main-hero",
+      "name": "Main Hero",
+      "settings": {
+        "title": "La mejor tienda online",
+        "banner_image": "shopify://shop_images/IMG_6847.jpg",
+        "description": "<p>Discover our curated collection of premium essentials, handpicked from around the world. Elevate your style with pieces designed for the modern aesthetic.</p>",
+        "primary_cta_text": "Go to Google",
+        "primary_cta_link": "https://google.com",
+      }
+    },
     "template_hero": {
       "type": "template-hero",
       "name": "Hero",
@@ -23,13 +34,11 @@
         "secondary_cta_link": "https://amazon.com"
       }
     },
-    "template_impact":{
-      "type":"template-impact", 
-      "name":"Template Impact", 
-      "settings":{
-
-      }, 
-      "block_order":[
+    "template_impact": {
+      "type": "template-impact",
+      "name": "Template Impact",
+      "settings": {},
+      "block_order": [
         "impact-card"
       ]
     },
@@ -50,9 +59,10 @@
     }
   },
   "order": [
+    "template_main_hero",
     "template_hero",
     "featured-collection",
-    "contact_form_r9cFxr", 
-    "template_impact"
+    "contact_form_r9cFxr",
+    "template_impact", 
   ]
 }
