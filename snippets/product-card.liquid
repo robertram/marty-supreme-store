@@ -1,0 +1,25 @@
+<div class="border border-gray-300 rounded-lg">
+  {% if product_product.featured_image.src != blank %}
+    <a href="{{ product_product.url | within: collection }}">
+      <img
+        src="{{ product_product.featured_image.src | img_url: 'medium' }}"
+        alt="{{ product_product.featured_image.alt | escape }}"
+        width="200"
+        height="300"
+        class="w-full object-cover object-center"
+      >
+    </a>
+
+  {% else %}
+    {{ 'product-2' | placeholder_svg_tag: 'w-[200px] h-[300px] md:h-[300px] object-cover object-center' }}
+  {% endif %}
+  <div class="flex flex-col p-4">
+    <p class="text-sm text-gray-500">{{ product_product.vendor }}</p>
+    <a href="{{ product_product.url | within: collection }}">{{ product_product.title }}</a>
+    {{ product_product.price | money }}
+  </div>
+  {% unless product_product.available -%}
+    <br>
+    <strong>sold out</strong>
+  {%- endunless %}
+</div>

@@ -1,0 +1,42 @@
+<div class="my-4 mx-2">
+<a class="text-base text-gray-500 hover:underline" href="{{ routes.collections_url }}">Go back to collections</a>
+
+  {% paginate collection.products by section.settings.number_of_products_per_page %}
+    <h1 class="text-2xl font-bold">{{ collection.title }}</h1>
+
+    <div class="max-w-7xl ">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for product in collection.products %}
+          {% render 'product-card', product_product: product %}
+        {% else %}
+          <p>no matches</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
+  {% endpaginate %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Template Collection",
+  "settings": [
+    {
+      "type": "number",
+      "id":"number_of_products_per_page", 
+      "default": 6, 
+      "label": "Number of products per page"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Template Collection"
+    }
+  ]
+}
+{% endschema %}

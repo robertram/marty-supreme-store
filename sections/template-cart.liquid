@@ -1,0 +1,136 @@
+{% if cart.item_count > 0 %}
+  <h1>Cart</h1>
+
+  <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+
+  <div>
+    <form action="{{ routes.cart_url }}" method="POST" novalidate>
+      <button type="submit" name="update">Update</button>
+
+      <table class="w-full border-collapse border border-gray-300">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Product</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Price</th>
+            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr class="hover:bg-gray-50">
+              <td class="border border-gray-300 px-4 py-3">
+                <a href="{{ item.url }}">
+                  {% if item.image %}
+                    <img
+                      src="{{ item.image | img_url: 'small' }}"
+                      alt="{{ item.title }}"
+                      class="w-16 h-16 object-cover rounded"
+                      width="64"
+                      height="64"
+                    >
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 object-cover rounded' }}
+                  {% endif %}
+                </a>
+              </td>
+              <td class="border border-gray-300 px-4 py-3 text-gray-900">
+                <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5 }}</a>
+                <span class="text-sm text-gray-500">{{ item.variant.title }}</span>
+                <a
+                  href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                  class="text-red-500 hover:text-red-700"
+                  >Remove</a
+                >
+              </td>
+              <td class="border border-gray-300 px-4 py-3 text-gray-900">
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="1"
+                  class="w-16 border text-center"
+                >
+              </td>
+              <td class="border border-gray-300 px-4 py-3 text-gray-900">{{ item.price | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div>
+        <input
+          type="text"
+          name="note"
+          placeholder="Add a note to your order"
+          class="w-full border border-gray-300 rounded-md p-2"
+        >
+      </div>
+
+      <div>
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'subtotal' %}
+              <div class="border border-gray-300 px-4 py-3 font-bold text-gray-900">
+                Subtotal: {{ cart.total_price | money }}
+              </div>
+            {% when 'update_button' %}
+              <div>
+                <button
+                  type="submit"
+                  name="update"
+                  class="w-[200px] bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-700"
+                >
+                  Update
+                </button>
+              </div>
+            {% when 'checkout_button' %}
+              <div>
+                <button
+                  type="submit"
+                  name="checkout"
+                  class="w-[200px] bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                >
+                  Checkout
+                </button>
+              </div>
+          {% endcase %}
+        {% endfor %}
+       
+      </div>
+    </form>
+  </div>
+
+{% else %}
+  <h1>Cart is empty</h1>
+  <p>You have no items in your cart.</p>
+  <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Template Cart",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "Subtotal",
+      "limit": 1
+    },
+    {
+      "type": "update_button",
+      "name": "Update Button",
+      "limit": 1
+    },
+    {
+      "type": "checkout_button",
+      "name": "Checkout Button",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Template Cart"
+    }
+  ]
+}
+{% endschema %}

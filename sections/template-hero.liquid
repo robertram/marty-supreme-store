@@ -1,0 +1,104 @@
+{% assign items = section.settings.list_items | newline_to_br | split: '<br />' %}
+
+<div class="flex justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full my-12 md:flex-row flex-col">
+  <div class="md:mb-0 mb-4 w-full md:w-auto ">
+    <img
+      class="w-full md:w-[500px] h-[500px] object-cover rounded-sm"
+      src="{{ section.settings.image_with_text_image | image_url }}"
+      alt="{{ section.settings.image_with_text_image.alt | default: section.settings.title }}"
+    >
+  </div>
+  <div class="md:w-1/2 md:ml-6">
+    <p class="text-sm uppercase text-amber-800 border-l-2 border-amber-800 pl-4 font-bold">New Arrival</p>
+
+    <h2 class="text-6xl font-bold my-4">{{ section.settings.title }}</h2>
+
+    <div class="text-xl text-gray-500">
+      {{ section.settings.description }}
+    </div>
+
+    {% comment %}
+      <ul class="my-4">
+        <li class="text-md my-2">✓ Premium quality materials</li>
+        <li class="text-md my-2">✓ Sustainable production</li>
+        <li class="text-md my-2">✓ Worldwide shipping</li>
+      </ul>
+    {% endcomment %}
+
+    <ul class="my-4">
+      {% for item in items %}
+        {% unless item == blank %}
+          <li class="text-md my-2">✓ {{ item }}</li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+
+    <div class="flex ">
+      {% if section.settings.primary_cta_text != blank %}
+        <a
+          href="{{ section.settings.primary_cta_link | default: '#' }}"
+          class="mr-4 bg-black px-4 py-2 rounded-md text-white text-sm"
+        >
+          {{- section.settings.primary_cta_text -}}
+        </a>
+      {% endif %}
+      {% if section.settings.secondary_cta_text != blank %}
+        <a
+          href="{{ section.settings.secondary_cta_link | default: '#' }}"
+          class="bg-white border-black border-2 px-4 py-2 rounded-md text-black text-sm font-bold"
+        >
+          {{- section.settings.secondary_cta_text -}}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Template Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_with_text_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Discover our curated collection of premium essentials, handpicked from around the world. Elevate your style with pieces designed for the modern aesthetic.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "list_items",
+      "label": "List items (one per line)"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_text",
+      "label": "Primary CTA Text"
+    },
+    {
+      "type": "text",
+      "id": "primary_cta_link",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary CTA Text"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_link",
+      "label": "Secondary CTA Link"
+    }
+  ]
+}
+{% endschema %}

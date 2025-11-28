@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "template_hero": {
+      "type": "template-hero",
+      "name": "Hero",
+      "settings": {
+        "title": "La mejor tienda online",
+        "image_with_text_image": "shopify://shop_images/IMG_6847.jpg",
+        "description": "<p>Discover our curated collection of premium essentials, handpicked from around the world. Elevate your style with pieces designed for the modern aesthetic.</p>",
+        "list_items": "Compra tu ropa de navidad\nDesde la comodidad de tu casa\nDesde tu celular",
+        "primary_cta_text": "Go to Google",
+        "primary_cta_link": "https://google.com",
+        "secondary_cta_text": "Go to Amazon",
+        "secondary_cta_link": "https://amazon.com"
+      }
+    },
+    "template_impact":{
+      "type":"template-impact", 
+      "name":"Template Impact", 
+      "settings":{
+
+      }, 
+      "block_order":[
+        "impact-card"
+      ]
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured Collection",
+        "featured_collection": "summer-collection",
+        "number_of_products_to_show": 4
+      }
+    },
+    "contact_form_r9cFxr": {
+      "type": "contact-form",
+      "name": "Contact Form",
+      "settings": {
+        "title": "Contact Form"
+      }
+    }
+  },
+  "order": [
+    "template_hero",
+    "featured-collection",
+    "contact_form_r9cFxr", 
+    "template_impact"
+  ]
+}

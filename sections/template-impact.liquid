@@ -1,0 +1,91 @@
+<div class=" bg-[#643a37] py-16 md:py-24">
+  <div class="mx-auto max-w-6xl px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-accent-foreground mb-6 text-balance">
+      {{ section.settings.title }}
+    </h2>
+
+    <div class="text-lg text-accent-foreground/90 mb-14 max-w-3xl mx-auto leading-relaxed">
+      {{ section.settings.description }}
+    </div>
+
+    <div class="flex justify-center flex-wrap mb-12 gap-6">
+      {% comment %}
+        <div class="flex flex-col items-center">
+          <div class="text-5xl md:text-6xl font-bold text-accent-foreground mb-3">
+            {stat.number}
+            <span class="text-4xl md:text-5xl">+</span>
+          </div>
+          <p class="text-lg text-accent-foreground/80">{stat.label}</p>
+        </div>
+      {% endcomment %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'impact-card' %}
+            {% render 'impact-card', impact: block.settings  %}
+        {% endcase %}
+      {% endfor %}
+
+      {% comment %}
+        {% render 'impact-card' %}
+        {% render 'impact-card' %}
+        {% render 'impact-card' %}
+      {% endcomment %}
+
+      {% comment %}
+        {stats.map((stat, index) => (
+          <div key={index} class="flex flex-col items-center">
+            <div class="text-5xl md:text-6xl font-bold text-accent-foreground mb-3">
+              {stat.number}
+              <span class="text-4xl md:text-5xl">+</span>
+            </div>
+            <p class="text-lg text-accent-foreground/80">{stat.label}</p>
+          </div>
+        ))}
+      {% endcomment %}
+    </div>
+    <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-10 py-4 rounded transition-colors duration-200 text-lg tracking-wide">
+      SHOP ALL TO SUPPORT
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Template Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Every purchase helps those in need"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>We are fully committed to helping alleviate suffering wherever and whenever we are able. Here are some stats on our efforts to alleviate food insecurity and world hunger.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "impact-card",
+      "name": "Impact Card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "stats",
+          "label": "Stats",
+          "default": "+400,000"
+        }, 
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Chocolate bars given"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

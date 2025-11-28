@@ -1,0 +1,215 @@
+<article class="py-8" itemscope itemtype="http://schema.org/BlogPosting">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'article_title' %}
+        <div class="flex items-center justify-center">
+          <div class="max-w-7xl text-center">
+            <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">
+              &larr; {{ blog.title }}
+            </a>
+            <h1 class="!text-4xl md:text-6xl font-medium" itemprop="headline">{{ article.title }}</h1>
+          </div>
+        </div>
+      {% when 'article_author' %}
+        {% if section.settings.enable_author %}
+          <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center" itemscope itemtype="http://schema.org/Person">
+              <small itemprop="author">{{ article.author }}</small>
+            </div>
+          </div>
+        {% endif %}
+      {% when 'article_published_date' %}
+        {% if section.settings.enable_published_date %}
+          <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center">
+              <time datetime="{{ article.published_at | date:"%Y-%m-%d" }}" itemprop="datePublished">
+                {{ article.published_at | date: format: 'on_date' }}
+              </time>
+            </div>
+          </div>
+        {% endif %}
+
+      {% when 'featured_image' %}
+        <div class="max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidden my-4">
+          {% if article.image != blank %}
+            <img
+              src="{{ article.image | img_url: 'large' }}"
+              loading="lazy"
+              alt="{{ article.image.alt }}"
+              width="1200"
+              height="600"
+              class="w-full h-80 md:h-96 object-cover object-center"
+            >
+          {% else %}
+            {% assign placeholder_image = 'lifestyle-1' %}
+            {{ placeholder_image | placeholder_svg_tag: 'w-full h-80 md:h-96 object-cover object-center' }}
+          {% endif %}
+        </div>
+      {% when 'article_content' %}
+        <div itemprop="articleBody">{{ article.content }}</div>
+      {% else %}
+
+    {% endcase %}
+  {% endfor %}
+</article>
+
+
+{% if blog.comments_enabled? %}
+  <div id="comments" class="my-16 max-w-2xl mx-auto">
+    <h2 class="font-bold text-3xl mb-8 text-gray-900">Comments</h2>
+    
+    {% if article.comments_count > 0 %}
+      {% paginate article.comments by 3 %}
+        <div class="space-y-8 mb-8">
+          {% for comment in article.comments %}
+            <div class="border-b border-gray-200 pb-6 last:border-b-0">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <strong class="text-lg font-semibold text-gray-900">{{ comment.author }}</strong>
+                  <time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}" class="block text-sm text-gray-500 mt-1">
+                    {{ comment.created_at | date: format: 'on_date' }}
+                  </time>
+                </div>
+              </div>
+              <div class="text-gray-700 leading-relaxed">
+                {{ comment.content }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <div class="flex justify-center items-center space-x-2 mt-8">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                ← Previous
+              </a>
+            {% endif %}
+            
+            <span class="text-gray-600 px-4">
+              Page {{ paginate.current_page }} of {{ paginate.pages }}
+            </span>
+            
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                Next →
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    {% else %}
+      <p class="text-gray-500">No comments yet. Be the first to comment!</p>
+    {% endif %}
+  </div>
+
+  <div id="comments-form" class="my-16 max-w-2xl mx-auto">
+    <h2 class="font-bold text-3xl mb-8 text-gray-900">Add a Comment</h2>
+    {% form 'new_comment', article %}
+      {% if form.errors %}
+        <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <h3 class="text-red-800 font-semibold mb-2">Please correct the following errors:</h3>
+          {{ form.errors | default_errors }}
+        </div>
+
+      {% elsif form.posted_successfully? %}
+        <p class="text-green-500 font-semibold mb-2">Comment posted successfully</p>
+        <p class="text-gray-700 mb-6">
+          Thank you for your comment. It will appear once it has been approved by our moderation team.
+        </p>
+      {% endif %}
+      
+      <div class="space-y-6">
+        <div>
+          <label for="comment_author" class="block text-sm font-medium text-gray-700 mb-2">Name <span class="text-red-500">*</span></label>
+          <input 
+            type="text" 
+            id="comment_author" 
+            name="comment[author]" 
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none" 
+            value="{{ form.author | default: '' }}"
+            required
+          >
+        </div>
+        
+        <div>
+          <label for="comment_email" class="block text-sm font-medium text-gray-700 mb-2">Email <span class="text-red-500">*</span></label>
+          <input 
+            type="email" 
+            id="comment_email" 
+            name="comment[email]" 
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none" 
+            value="{{ form.email | default: '' }}"
+            required
+          >
+        </div>
+        
+        <div>
+          <label for="comment_body" class="block text-sm font-medium text-gray-700 mb-2">Comment <span class="text-red-500">*</span></label>
+          <textarea 
+            id="comment_body" 
+            name="comment[body]" 
+            rows="6"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors outline-none resize-y"
+          >{{ form.body | default: '' }}</textarea>
+        </div>
+        
+        <div>
+          <button 
+            type="submit" 
+            class="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-white font-medium px-8 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2"
+          >
+            Submit Comment
+          </button>
+        </div>
+      </div>
+    {% endform %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Template Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_author",
+      "default": true,
+      "label": "Display Author Name"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_published_date",
+      "default": true,
+      "label": "Display Published Date"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article_title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "article_author",
+      "name": "Author",
+      "limit": 1
+    },
+    {
+      "type": "article_published_date",
+      "name": "Published Date",
+      "limit": 1
+    },
+    {
+      "type": "featured_image",
+      "name": "Thumbnail",
+      "limit": 2
+    },
+    {
+      "type": "article_content",
+      "name": "Content",
+      "limit": 1
+    }
+  ]
+}
+{% endschema %}

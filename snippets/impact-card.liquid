@@ -1,0 +1,6 @@
+<div class="flex flex-col items-center justify-center">
+  <div class="text-xl md:text-3xl font-bold text-accent-foreground mb-3">
+    {{ impact.stats | default: '+400,000' }}
+  </div>
+  <p class="text-lg text-accent-foreground/80"> {{ impact.description | default: 'chocolate bars given' }}</p>
+</div>
