@@ -1,17 +1,12 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
+<div class="relative text-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }">
   <div class="mx-auto px-4 sm:px-6">
-    <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-      <!-- STORE NAME / STORE LOGO -->
-      <div class="flex justify-start lg:flex-1 truncate">
-        <h1 class="text-xl font-bold truncate">{{ section.settings.mobile_menu_title }}</h1>
-      </div>
-
-      <div class="-mr-2 -my-2 ml-3 md:hidden">
+    <div class="flex justify-between items-center py-6 md:space-x-10">
+      <div class="-mr-2 -my-2 ml-3">
         <button
           type="button"
-          class="cursor-pointer bg-white p-2 inline-flex items-center justify-center focus:outline-none"
+          class="cursor-pointer  p-2 inline-flex items-center justify-center focus:outline-none text-white"
           x-on:click="mobileMenuOpen = !mobileMenuOpen"
         >
           {% render 'hamburguer-icon' %}
@@ -19,31 +14,38 @@
       </div>
 
       <!-- NAVIGATION MENU -->
-      <nav class="hidden md:flex space-x-10">
-        {% for link in main_menu_linklist %}
-          <div class="relative">
-            <a href="{{ link.url }}" class="cursor-pointer text-base text-gray-500 hover:text-gray-900">
-              {{- link.title -}}
-            </a>
-          </div>
-        {% endfor %}
-      </nav>
+      {% comment %}
+        <nav class="hidden md:flex space-x-10">
+          {% for link in main_menu_linklist %}
+            <div class="relative">
+              <a href="{{ link.url }}" class="cursor-pointer text-base text-white hover:text-gray-900">
+                {{- link.title -}}
+              </a>
+            </div>
+          {% endfor %}
+        </nav>
+      {% endcomment %}
 
-      <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
+      <!-- STORE NAME / STORE LOGO -->
+      <div class="flex m-0 truncate">
+        <h1 class="text-xl font-bold truncate">{{ section.settings.mobile_menu_title }}</h1>
+      </div>
+
+      <div class="flex items-center  space-x-5">
         <button
           x-on:click="searchBarOpen=true"
           type="button"
-          class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900 cursor-pointer"
+          class="whitespace-nowrap text-base text-white hover:text-gray-900 cursor-pointer"
         >
           {% render 'icon-search' %}
         </button>
-        <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
+        <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-white hover:text-gray-400">
           {% render 'icon-shopping-bag' %}
         </a>
 
         {% if shop.customer_accounts_enabled %}
-          <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
-          <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
+          <a href="{{ routes.account_login_url }}" class="text-base text-white hover:text-gray-400">Login</a>
+          <a href="{{ routes.account_register_url }}" class="text-base text-white hover:text-gray-400">Register</a>
         {% endif %}
       </div>
     </div>
@@ -51,7 +53,7 @@
   <div
     x-show="mobileMenuOpen"
     @click.away="mobileMenuOpen = false"
-    class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden"
+    class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left"
   >
     <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
       <div class="p-5 divide-y-2 divide-gray-50">
