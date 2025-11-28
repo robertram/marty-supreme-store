@@ -14,7 +14,7 @@
       "name": "Main Hero",
       "settings": {
         "title": "La mejor tienda online",
-        "banner_image": "shopify://shop_images/theme_cover_image.jpg",
+        "banner_image": "shopify://shop_images/Hero_image.webp",
         "primary_cta_text": "Go to Google",
         "primary_cta_link": "https://google.com"
       }
