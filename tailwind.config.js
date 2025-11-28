@@ -10,7 +10,8 @@ module.exports ={
   theme: {
     extend: {
       colors: {
-        primary: '#FD7603'
+        primary: '#FD7603', 
+        primaryHover:'#fd7803c5'
       },
       height: {
         '94': '22rem', 
