@@ -1,103 +1,126 @@
 {% if cart.item_count > 0 %}
-  <h1>Cart</h1>
+  <div class="text-white">
+    <div class="flex justify-between">
+      <a href="{{ routes.root_url }}" class="mx-6 my-auto">{% render 'back-icon' %}</a>
+      <h1 class="text-2xl text-center my-4">Shopping Cart</h1>
+      <div></div>
+    </div>
 
-  <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
-
-  <div>
-    <form action="{{ routes.cart_url }}" method="POST" novalidate>
-      <button type="submit" name="update">Update</button>
-
-      <table class="w-full border-collapse border border-gray-300">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Product</th>
-            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Price</th>
-            <th class="border border-gray-300 px-4 py-3 text-left font-semibold text-gray-900">Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="px-6">
+      <form action="{{ routes.cart_url }}" method="POST" novalidate>
+        <div class="my-6">
           {% for item in cart.items %}
-            <tr class="hover:bg-gray-50">
-              <td class="border border-gray-300 px-4 py-3">
-                <a href="{{ item.url }}">
-                  {% if item.image %}
-                    <img
-                      src="{{ item.image | img_url: 'small' }}"
-                      alt="{{ item.title }}"
-                      class="w-16 h-16 object-cover rounded"
-                      width="64"
-                      height="64"
-                    >
-                  {% else %}
-                    {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 object-cover rounded' }}
-                  {% endif %}
-                </a>
-              </td>
-              <td class="border border-gray-300 px-4 py-3 text-gray-900">
-                <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5 }}</a>
-                <span class="text-sm text-gray-500">{{ item.variant.title }}</span>
-                <a
-                  href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
-                  class="text-red-500 hover:text-red-700"
-                  >Remove</a
-                >
-              </td>
-              <td class="border border-gray-300 px-4 py-3 text-gray-900">
-                <input
-                  type="number"
-                  name="updates[]"
-                  value="{{ item.quantity }}"
-                  min="1"
-                  class="w-16 border text-center"
-                >
-              </td>
-              <td class="border border-gray-300 px-4 py-3 text-gray-900">{{ item.price | money }}</td>
-            </tr>
+            <div class="text-white bg-[#23180F] rounded-md flex">
+              <div class=" px-4 py-3">
+                {% if item.image %}
+                  <img
+                    src="{{ item.image | img_url: 'small' }}"
+                    alt="{{ item.title }}"
+                    class="w-16 h-16 object-cover rounded"
+                    width="64"
+                    height="64"
+                  >
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'w-16 h-16 object-cover rounded' }}
+                {% endif %}
+              </div>
+              <div class="w-full">
+                <div class=" px-4 py-3 ">
+                  <div class="flex gap-4">
+                  <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5 }}</a> 
+                  <a
+                    href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0"
+                    class="text-red-500 hover:text-red-700"
+                  >
+                    Remove
+                  </a>
+                </div>
+
+                  <div>
+                    <span class="text-sm text-gray-500">{{ item.variant.title }}</span>
+                  </div>
+                </div>
+                <div class="flex justify-between w-full">
+                  <div class=" px-4 py-3 ">{{ item.price | money }}</div>
+                  <div class="px-4 py-3">
+                    <div class="inline-flex items-center gap-2 js-qty-wrapper">
+                      <button
+                        type="button"
+                        class="px-2 py-1 border rounded text-lg js-qty-btn"
+                        data-change="-1"
+                        aria-label="Decrease quantity"
+                      >
+                        −
+                      </button>
+                      <input
+                        type="number"
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        min="1"
+                        class="w-16 border text-center"
+                      >
+                      <button
+                        type="button"
+                        class="px-2 py-1 border rounded text-lg js-qty-btn"
+                        data-change="1"
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           {% endfor %}
-        </tbody>
-      </table>
+        </div>
 
-      <div>
-        <input
-          type="text"
-          name="note"
-          placeholder="Add a note to your order"
-          class="w-full border border-gray-300 rounded-md p-2"
-        >
-      </div>
+        {% comment %}
+          <div>
+            <input
+              type="text"
+              name="note"
+              placeholder="Add a note to your order"
+              class="w-full border border-gray-300 rounded-md p-2"
+            >
+          </div>
+        {% endcomment %}
 
-      <div>
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'subtotal' %}
-              <div class="border border-gray-300 px-4 py-3 font-bold text-gray-900">
-                Subtotal: {{ cart.total_price | money }}
-              </div>
-            {% when 'update_button' %}
-              <div>
-                <button
-                  type="submit"
-                  name="update"
-                  class="w-[200px] bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-700"
-                >
-                  Update
-                </button>
-              </div>
-            {% when 'checkout_button' %}
-              <div>
-                <button
-                  type="submit"
-                  name="checkout"
-                  class="w-[200px] bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-                >
-                  Checkout
-                </button>
-              </div>
-          {% endcase %}
-        {% endfor %}
-       
-      </div>
-    </form>
+        <div>
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'subtotal' %}
+                <div class=" py-3  flex justify-between">
+                  <p class="text-gray-200 font-light">Subtotal:</p>
+                  <p class="font-bold">
+                    {{ cart.total_price | money }}
+                  </p>
+                </div>
+              {% when 'update_button' %}
+                <div>
+                  <button
+                    type="submit"
+                    name="update"
+                    class="w-[200px] bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-700"
+                  >
+                    Update
+                  </button>
+                </div>
+              {% when 'checkout_button' %}
+                <div>
+                  <button
+                    type="submit"
+                    name="checkout"
+                    class="bg-[#FD7603] hover:bg-[#fd7803c5] text-white py-3 px-6 rounded-full w-full md:w-max"
+                  >
+                    Proceed to Checkout
+                  </button>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </form>
+    </div>
   </div>
 
 {% else %}
@@ -105,6 +128,31 @@
   <p>You have no items in your cart.</p>
   <a href="{{ routes.all_products_collection_url }}">Continue shopping</a>
 {% endif %}
+
+<script>
+  (function () {
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest('.js-qty-btn');
+      if (!button) return;
+
+      var change = Number(button.dataset.change || 0);
+      var wrapper = button.closest('.js-qty-wrapper');
+      if (!wrapper) return;
+
+      var input = wrapper.querySelector('input[type="number"]');
+      if (!input) return;
+
+      var min = Number(input.min || 1);
+      var current = Number(input.value || min);
+      var next = current + change;
+
+      if (next < min) next = min;
+
+      input.value = next;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  })();
+</script>
 
 {% schema %}
 {

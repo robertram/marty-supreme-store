@@ -11,7 +11,8 @@ module.exports ={
     extend: {
       colors: {
         primary: '#FD7603', 
-        primaryHover:'#fd7803c5'
+        primaryHover:'#fd7803c5', 
+        brown: '#23180F'
       },
       height: {
         '94': '22rem', 
