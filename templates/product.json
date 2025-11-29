@@ -20,10 +20,6 @@
           "type": "price",
           "settings": {}
         },
-        "vendor_6VfWPH": {
-          "type": "vendor",
-          "settings": {}
-        },
         "variant_selector": {
           "type": "variant_selector",
           "settings": {}
@@ -44,7 +40,6 @@
       "block_order": [
         "title_wiiXpQ",
         "price_HHih3P",
-        "vendor_6VfWPH",
         "variant_selector",
         "quantity_xYH7yi",
         "description_B34YYH",
