@@ -32,6 +32,7 @@
       "name": "Hero",
       "settings": {
         "title": "La mejor tienda online",
+        "banner_image": "shopify://shop_images/holywood.webp",
         "description": "<p>Discover our curated collection of premium essentials, handpicked from around the world. Elevate your style with pieces designed for the modern aesthetic.</p>",
         "list_items": "Compra tu ropa de navidad\nDesde la comodidad de tu casa\nDesde tu celular",
         "primary_cta_text": "Go to Google",
@@ -39,19 +40,11 @@
         "secondary_cta_text": "Go to Amazon",
         "secondary_cta_link": "https://amazon.com"
       }
-    },
-    "contact_form_r9cFxr": {
-      "type": "contact-form",
-      "name": "Contact Form",
-      "settings": {
-        "title": "Contact Form"
-      }
-    },
+    }
   },
   "order": [
     "template_main_hero",
     "featured-collection",
-    "template_hero",
-    "contact_form_r9cFxr",
+    "template_hero"
   ]
 }
