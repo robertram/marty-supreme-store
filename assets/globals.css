@@ -1,3 +1,7 @@
 body{
   background-color: black;
 }
+
+.template-product{
+  background-color: aquamarine !important;
+}
