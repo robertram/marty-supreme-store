@@ -1,25 +1,24 @@
-<div class="border border-gray-300 rounded-lg">
+<div class="rounded-lg text-white">
   {% if product_product.featured_image.src != blank %}
     <a href="{{ product_product.url | within: collection }}">
       <img
-        src="{{ product_product.featured_image.src | img_url: 'medium' }}"
+        src="{{ product_product.featured_image.src | img_url: 'large' }}"
         alt="{{ product_product.featured_image.alt | escape }}"
         width="200"
         height="300"
-        class="w-full object-cover object-center"
+        class="w-full object-cover object-center h-[400px] rounded-lg"
       >
     </a>
-
   {% else %}
     {{ 'product-2' | placeholder_svg_tag: 'w-[200px] h-[300px] md:h-[300px] object-cover object-center' }}
   {% endif %}
-  <div class="flex flex-col p-4">
-    <p class="text-sm text-gray-500">{{ product_product.vendor }}</p>
-    <a href="{{ product_product.url | within: collection }}">{{ product_product.title }}</a>
-    {{ product_product.price | money }}
+  <div class="flex flex-col pt-2">
+    {% comment %} <p class="text-sm text-gray-500">{{ product_product.vendor }}</p> {% endcomment %}
+    <a href="{{ product_product.url | within: collection }}" class="text-lg">{{ product_product.title }}</a>
+    {% comment %} {{ product_product.price | money }} {% endcomment %}
   </div>
-  {% unless product_product.available -%}
+  {% comment %} {% unless product_product.available -%}
     <br>
     <strong>sold out</strong>
-  {%- endunless %}
+  {%- endunless %} {% endcomment %}
 </div>

@@ -47,20 +47,11 @@
         "title": "Contact Form"
       }
     },
-    "template_impact": {
-      "type": "template-impact",
-      "name": "Template Impact",
-      "settings": {
-        "title": "Every purchase helps those in need",
-        "description": "<p>We are fully committed to helping alleviate suffering wherever and whenever we are able. Here are some stats on our efforts to alleviate food insecurity and world hunger.</p>"
-      }
-    }
   },
   "order": [
     "template_main_hero",
     "featured-collection",
     "template_hero",
     "contact_form_r9cFxr",
-    "template_impact"
   ]
 }
