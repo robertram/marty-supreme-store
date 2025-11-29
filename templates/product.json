@@ -20,8 +20,8 @@
           "type": "price",
           "settings": {}
         },
-        "variant_selector": {
-          "type": "variant_selector",
+        "variant_radio_f4Bwcm": {
+          "type": "variant_radio",
           "settings": {}
         },
         "quantity_xYH7yi": {
@@ -40,7 +40,7 @@
       "block_order": [
         "title_wiiXpQ",
         "price_HHih3P",
-        "variant_selector",
+        "variant_radio_f4Bwcm",
         "quantity_xYH7yi",
         "description_B34YYH",
         "checkout_buttons_pDQUr6"
