@@ -44,6 +44,14 @@
     "template_footer_V4JtEN": {
       "type": "template-footer",
       "blocks": {
+        "social_item_eUkQNH": {
+          "type": "social_item",
+          "settings": {
+            "title": "",
+            "icon": "shopify://shop_images/icons8-tiktok.svg",
+            "url": "https://www.tiktok.com/@martysuprememovie"
+          }
+        },
         "social_item_wjUh8H": {
           "type": "social_item",
           "settings": {
@@ -62,6 +70,7 @@
         }
       },
       "block_order": [
+        "social_item_eUkQNH",
         "social_item_wjUh8H",
         "social_item_CqY6bU"
       ],
