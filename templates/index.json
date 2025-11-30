@@ -40,11 +40,33 @@
         "secondary_cta_text": "Go to Amazon",
         "secondary_cta_link": "https://amazon.com"
       }
+    },
+    "template_footer_V4JtEN": {
+      "type": "template-footer",
+      "blocks": {
+        "social_item_CqY6bU": {
+          "type": "social_item",
+          "settings": {
+            "title": "",
+            "icon": "shopify://shop_images/icons8-instagram.svg",
+            "url": "https://www.instagram.com/martysupreme/"
+          }
+        }
+      },
+      "block_order": [
+        "social_item_CqY6bU"
+      ],
+      "name": "Footer",
+      "settings": {
+        "menu": "footer",
+        "copyright": "2025 Marty Supreme. All rights reserved."
+      }
     }
   },
   "order": [
     "template_main_hero",
     "featured-collection",
-    "template_hero"
+    "template_hero",
+    "template_footer_V4JtEN"
   ]
 }
