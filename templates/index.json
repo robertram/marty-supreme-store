@@ -44,6 +44,14 @@
     "template_footer_V4JtEN": {
       "type": "template-footer",
       "blocks": {
+        "social_item_wjUh8H": {
+          "type": "social_item",
+          "settings": {
+            "title": "",
+            "icon": "shopify://shop_images/icons8-twitter.svg",
+            "url": "https://x.com/martysupreme"
+          }
+        },
         "social_item_CqY6bU": {
           "type": "social_item",
           "settings": {
@@ -54,6 +62,7 @@
         }
       },
       "block_order": [
+        "social_item_wjUh8H",
         "social_item_CqY6bU"
       ],
       "name": "Footer",
