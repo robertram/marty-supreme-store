@@ -19,16 +19,11 @@
         "checkout_button_YUHDVd": {
           "type": "checkout_button",
           "settings": {}
-        },
-        "update_button_3kTf4F": {
-          "type": "update_button",
-          "settings": {}
         }
       },
       "block_order": [
         "subtotal",
-        "checkout_button_YUHDVd",
-        "update_button_3kTf4F"
+        "checkout_button_YUHDVd"
       ],
       "settings": {}
     }
