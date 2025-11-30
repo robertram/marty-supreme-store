@@ -41,7 +41,6 @@ If you're not a student, you can still use this repository to start a new Shopif
 
 
 ## Run project
-
 shopify theme dev
 
 ## Run Tailwind
