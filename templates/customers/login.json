@@ -1,0 +1,15 @@
+{
+
+  "sections": {
+    "template": {
+      "type": "template-customer-login",
+      "name": "Login",
+      "settings": {
+        "title": "Login"
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
+}
