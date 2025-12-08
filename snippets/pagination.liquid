@@ -2,16 +2,18 @@
   <nav role="navigation" class="flex justify-center items-center my-8">
     {% if pagination.previous %}
       <a
-        href="{{ pagination.previous }}"
+        href="{{ pagination.previous.url }}"
         class="border border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white px-8 py-3 mx-1"
       >
         Previous
       </a>
     {% endif %}
 
+    <span class="text-gray-600 px-4">Page {{ pagination.current_page }} of {{ pagination.pages }}</span>
+
     {% if pagination.next %}
       <a
-        href="{{ pagination.next }}"
+        href="{{ pagination.next.url }}"
         class="border border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white px-8 py-3 mx-1"
       >
         Next

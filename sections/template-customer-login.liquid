@@ -5,6 +5,24 @@
   <div x-show="loginForm" class="max-w-md w-full space-y-8">
     <div>
       <h1 class="text-center text-3xl font-bold mt-6">Sign in with your account</h1>
+      {% if shop.checkout.guest_login %}
+        <div>
+          <h1 class="text-4xl font-bold">Continue as a guest</h1>
+
+          {% form 'guest_login' %}
+            <div>
+              <button
+                type="submit"
+                class="relative w-full py-2 px-4 bg-white text-black cursor-pointer hover:bg-gray-300"
+              >
+                Continue
+              </button>
+            </div>
+          {% endform %}
+        </div>
+      {% else %}
+        <div>Guest checkout is currently disabled</div>
+      {% endif %}
     </div>
     <div class="mt-8">
       {% form 'customer_login' %}
@@ -62,7 +80,6 @@
     </div>
   </div>
   <div x-show="pwRecoverForm" class="max-w-md w-full space-y-8">
-
     <div class="my-2 text-sm">
       <a
         x-on:click="loginForm = ! loginForm; pwRecoverForm = ! pwRecoverForm"
