@@ -80,7 +80,7 @@
             <div class="swiper-wrapper">
               {% for media in product.media %}
                 <div class="swiper-slide">
-                  <div class="h-80 overflow-hidden">
+                  <div class="h-[100vw] overflow-hidden">
                     {% render 'product-media', media: media, media_class: 'w-full object-cover' %}
                   </div>
                 </div>
@@ -345,22 +345,6 @@
 
   customElements.define('variant-selector', VariantSelector);
 </script>
-{% comment %}
-  <script>
-    import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.mjs';
-
-    const swiper = new Swiper('.swiper', {
-      direction: 'horizontal',
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      navigation: {
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-      },
-    });
-  </script>
-{% endcomment %}
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
