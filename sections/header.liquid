@@ -1,4 +1,12 @@
-{% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{% comment %} {% assign main_menu_linklist = linklists[section.settings.menu].links %} {% endcomment %}
+
+{% liquid
+  if section.settings.menu.links == blank
+    assign main_menu_linklist = linklists[section.settings.menu].links
+  else
+    assign main_menu_linklist = section.settings.menu.links
+  endif
+%}
 
 <div class="relative text-white" x-data="{ mobileMenuOpen: false, searchBarOpen: false }" x-cloak>
   <div class="mx-auto px-4 sm:px-6">
@@ -66,7 +74,7 @@
             <button
               x-on:click="mobileMenuOpen = !mobileMenuOpen"
               type="button"
-              class="bg-white rounded-md p-2 text-gray-500"
+              class="bg-white rounded-md p-2 text-gray-500 cursor-pointer"
             >
               {% render 'close-icon' %}
             </button>

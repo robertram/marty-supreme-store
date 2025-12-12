@@ -4,16 +4,16 @@
 
     <p class="text-xl">{{ search.results.size }} results found for {{ search.terms | escape }}</p>
 
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-6">
       <form action="{{ routes.search_url }}" method="get" class="border flex rounded my-2">
         <input
           type="search"
           name="q"
           placeholder="Search"
           value="{{ search.terms | escape }}"
-          class="px-4 py-2 w-80 border-none"
+          class="px-4 py-2 w-80 border-none bg-white"
         >
-        <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white border px-4 ">Search</button>
+        <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white border px-4 cursor-pointer">Search</button>
       </form>
     </div>
 
@@ -33,13 +33,13 @@
       {% else %}
         <div class="text-center my-4">
           <p>
-            No results found for the search <span class="font-bold">{{ search.terms | escape }}</span>. Try to use a different
-            keyword.
+            No results found for the search <span class="font-bold">{{ search.terms | escape }}</span>. Try to use a
+            different keyword.
           </p>
         </div>
       {% endif %}
     {% endif %}
-  {% endpaginate %}
 
-  {% render 'pagination', pagination: paginate %}
+    {% render 'pagination', pagination: paginate %}
+  {% endpaginate %}
 </div>
